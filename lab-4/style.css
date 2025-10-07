@@ -1,0 +1,74 @@
+/* Base document styling */
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fafafa;
+    margin: 0 auto;
+    padding: 2rem;
+    max-width: 900px;
+}
+
+/* Headings */
+h1, h2, h3 {
+    font-family: 'Merriweather', serif;
+    color: #1a2a40;
+    margin-top: 1.5em;
+}
+
+h1 {
+    font-size: 2.2em;
+    text-align: center;
+    border-bottom: 3px solid #3b6ea5;
+    padding-bottom: 0.3em;
+}
+
+h2 {
+    font-size: 1.6em;
+    color: #2b4b75;
+    margin-top: 1.2em;
+}
+
+h3 {
+    font-size: 1.3em;
+    color: #445d7a;
+}
+
+/* Text and list elements */
+p, li {
+    margin-bottom: 1em;
+}
+
+/* Lists */
+ul, ol {
+    margin-left: 2em;
+}
+
+/* Header styling */
+header {
+    background: #eaf2f8;
+    border: 1px solid #d0e1f9;
+    border-radius: 10px;
+    padding: 1.5em;
+    margin-bottom: 2em;
+}
+
+/* Addendum section emphasis */
+article:last-of-type {
+    background-color: #f8fbff;
+    border-left: 5px solid #3b6ea5;
+    padding: 1.5em;
+    margin-top: 2em;
+    border-radius: 6px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 3em;
+    border-top: 1px solid #ccc;
+    padding-top: 1em;
+}
