@@ -4,3 +4,4 @@ function sortNumbers() {
     numArray.sort((a, b) => a - b);
     document.getElementById('output').textContent = numArray.join(', ');
 }
+
