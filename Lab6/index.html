@@ -4,12 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ITC505 Lab 6 - Interactive Tool</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+  <!-- Google Font for modern look -->
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
     rel="stylesheet"
   />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -32,7 +34,7 @@
       </div>
     </header>
 
-    <!-- SIDEBAR NAV -->
+    <!-- LEFT MENU / NAV -->
     <nav class="sidebar glass-card">
       <h2 class="sidebar-title">📂 Navigation</h2>
       <ul class="nav-list">
@@ -51,7 +53,7 @@
       </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN CONTENT (JS FEATURE HERE) -->
     <main class="content glass-card">
       <!-- INTERACTIVE TOOL -->
       <section class="tool-card inner-card">
@@ -83,7 +85,7 @@
         <div class="error-msg" id="errorMsg"></div>
       </section>
 
-      <!-- HOW IT WORKS -->
+      <!-- HOW IT WORKS / EXPLANATION -->
       <section class="how-it-works inner-card">
         <h3>🛠 How this works</h3>
         <ul>
@@ -95,7 +97,7 @@
       </section>
     </main>
 
-    <!-- RIGHT SIDE AD -->
+    <!-- RIGHT AD / AMAZON -->
     <aside class="ad glass-card">
       <h2 class="ad-title">🛒 Sponsored</h2>
       <a
@@ -116,16 +118,18 @@
       </a>
     </aside>
 
-    <!-- FOOTER -->
+    <!-- FOOTER / ADDENDUM / LAST MODIFIED -->
     <footer class="footer glass-card">
       <section class="addendum">
         <h2>📝 Addendum</h2>
 
         <p><strong>Problem I solved:</strong> I built an interactive “Number Sorter” web tool.
-        The user types any comma-separated numbers and clicks a button. The page shows those numbers sorted in ascending order.</p>
+        The user types any comma-separated numbers and clicks a button. The page shows those
+        numbers sorted in ascending order.</p>
 
-        <p><strong>How I solved it:</strong> This page uses a Holy Grail layout (header, left nav, main content, right ad, footer) built with CSS Grid.
-        The JavaScript lives in <code>script.js</code> and is loaded with a
+        <p><strong>How I solved it:</strong> This page uses a Holy Grail layout (header, left nav,
+        main content, right ad, footer) built with CSS Grid. The JavaScript lives in
+        <code>script.js</code> and is loaded into the HTML using a
         <code>&lt;script&gt;</code> tag. The script:
         <ol>
           <li>Reads the text box on button click.</li>
@@ -149,7 +153,7 @@
       </section>
     </footer>
 
-  </div> <!-- /layout -->
+  </div><!-- /layout -->
 
   <!-- JavaScript file -->
   <script src="script.js"></script>
