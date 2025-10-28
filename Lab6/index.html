@@ -1,114 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ITC 505 - Lab 6: Do Something</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 6 - Holy Grail Layout</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="layout-grid">
-        <!-- ===== HEADER ===== -->
-        <header class="site-header">
-            <div class="header-content">
-                <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Northern_Arizona_University_seal.svg/120px-Northern_Arizona_University_seal.svg.png" alt="NAU Logo">
-                <div>
-                    <h1>Lab 6: Do Something</h1>
-                    <p class="subtitle">ITC 505 • Interactive JS + Holy Grail Layout</p>
-                </div>
-            </div>
-        </header>
+    <header>
+        <h1>My Awesome Lab 6 Page</h1>
+    </header>
 
-        <!-- ===== SIDEBAR / MENU ===== -->
-        <nav class="sidebar">
-            <h2>Site Menu</h2>
-            <ul class="menu-links">
-                <li><a href="#">🏠 Home</a></li>
-                <li><a href="#">📊 Dashboard</a></li>
-                <li><a href="#">🍽 Meal Tracker</a></li>
-                <li><a href="#">📅 Progress History</a></li>
-                <li><a href="#">⚙ Settings</a></li>
-                <li><a href="#">📞 Contact</a></li>
-            </ul>
-        </nav>
+    <aside class="sidebar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </aside>
 
-        <!-- ===== MAIN CONTENT (YOUR JS APP LIVES HERE) ===== -->
-        <main class="main-content">
-            <section class="tool-card">
-                <h2>Number Sorter & Stats Tool</h2>
-                <p class="explain">
-                    Enter a list of numbers separated by commas. Example:
-                    <code>12, 5, 9, 1, 5</code><br />
-                    Click "Process" to see:
-                    - Bubble sorted ascending list,
-                    - Minimum,
-                    - Maximum,
-                    - Average.
-                </p>
+    <main>
+        <h2>Sort Numbers</h2>
+        <p>Enter numbers separated by commas:</p>
+        <input type="text" id="numInput" placeholder="Example: 5,2,9,1,3">
+        <button onclick="sortNumbers()">Sort</button>
+        <p>Sorted Result:</p>
+        <p id="output"></p>
+    </main>
 
-                <div class="input-row">
-                    <label for="numbersInput" class="input-label">Your numbers:</label>
-                    <input id="numbersInput" class="text-field" type="text" placeholder="10, 4, 7, 22, 3" />
-                    <button id="processBtn" class="action-btn">Process</button>
-                </div>
+    <aside class="ad">
+        <a href="https://www.amazon.com/" target="_blank">
+            <img src="https://via.placeholder.com/200x300?text=Amazon+Ad" alt="Amazon Product">
+        </a>
+    </aside>
 
-                <div id="errorBox" class="error-box hidden"></div>
+    <footer>
+        <p>Addendum: This JavaScript program takes numbers from the user, sorts them, and displays the result.</p>
+        <p>Last updated: <span id="lastModified"></span></p>
+    </footer>
 
-                <div class="results">
-                    <div><strong>Sorted:</strong> <span id="sortedOutput">—</span></div>
-                    <div><strong>Min:</strong> <span id="minOutput">—</span></div>
-                    <div><strong>Max:</strong> <span id="maxOutput">—</span></div>
-                    <div><strong>Average:</strong> <span id="avgOutput">—</span></div>
-                </div>
-            </section>
-        </main>
-
-        <!-- ===== RIGHT SIDEBAR AD ===== -->
-        <aside class="ad-bar">
-            <h2>Sponsored</h2>
-            <a class="ad-link" href="https://www.amazon.com/dp/B0CFQ8Z3QW" target="_blank" rel="noopener noreferrer">
-                <img class="ad-img" src="https://m.media-amazon.com/images/I/61u1VL+fJiL._AC_SL1500_.jpg" alt="Wireless Mouse Ad (Safe For Work)">
-                <p class="ad-caption">Ergonomic Wireless Mouse on Amazon →</p>
-            </a>
-        </aside>
-
-        <!-- ===== FOOTER ===== -->
-        <footer class="site-footer">
-            <section class="addendum">
-                <h2>Addendum</h2>
-                <p><strong>Problem I solved:</strong> I built an interactive Number Sorter & Stats Tool. The user types a comma-separated list of numbers, and the page calculates a bubble-sorted list, minimum, maximum, and average.</p>
-                <p><strong>How I solved it:</strong>  
-                    In <code>app.js</code> I:
-                    (1) Read the input field,
-                    (2) Converted the string into an array of numbers,
-                    (3) Used a Bubble Sort function I wrote (nested loops that keep swapping if out of order),
-                    (4) Computed min, max, and average,
-                    (5) Updated the DOM to display the results.
-                    The button click is the event that triggers all this.
-                </p>
-                <p><strong>Difficulties & fixes:</strong>  
-                    - Handling bad input like "hi, 3, !!" caused <code>NaN</code>. I fixed it by validating every value and showing an error box instead of crashing.  
-                    - Making layout match Holy Grail: I used CSS Grid with named areas (<code>header</code>, <code>nav</code>, <code>main</code>, <code>ad</code>, <code>footer</code>) and responsive rules.  
-                    - The assignment footer needs a "Last updated" script, so I included the provided code below.
-                </p>
-            </section>
-
-            <section class="last-updated">
-                <p>Last updated:
-                    <span id="lastModified"></span>
-                </p>
-            </section>
-        </footer>
-    </div>
-
-    <!-- ===== REQUIRED LAST MODIFIED SCRIPT FROM ASSIGNMENT ===== -->
-    <script type="text/javascript">
+    <script src="script.js"></script>
+    <script>
         var x = document.lastModified;
         document.getElementById('lastModified').textContent = x;
     </script>
 
-    <!-- ===== YOUR APP LOGIC ===== -->
-    <script src="app.js"></script>
 </body>
 </html>
+
