@@ -7,8 +7,10 @@ const outEl = document.getElementById("outputArea");
 const errEl = document.getElementById("errorMsg");
 
 btnEl.addEventListener("click", () => {
+  // clear old error
   errEl.textContent = "";
 
+  // read box
   const raw = inputEl.value.trim();
 
   if (raw.length === 0) {
@@ -17,6 +19,7 @@ btnEl.addEventListener("click", () => {
     return;
   }
 
+  // split into pieces
   const parts = raw.split(",");
   const nums = [];
 
@@ -42,8 +45,10 @@ btnEl.addEventListener("click", () => {
     return;
   }
 
-  // Sort numerically (ascending)
+  // numeric sort (ascending)
   nums.sort((a, b) => a - b);
 
+  // show result
   outEl.textContent = "[ " + nums.join(", ") + " ]";
 });
+
