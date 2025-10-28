@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -14,6 +15,7 @@ body {
     grid-template-rows: auto 1fr auto;
     height: 100vh;
     font-family: Arial, sans-serif;
+    background-color: #e9f5ec; /* Light green backdrop */
 }
 
 header {
@@ -26,7 +28,7 @@ header {
 
 .sidebar {
     grid-area: sidebar;
-    background-color: #f4f4f4;
+    background-color: #d6eaff; /* Soft blue */
     padding: 20px;
 }
 
@@ -38,14 +40,30 @@ header {
     margin-bottom: 10px;
 }
 
+.sidebar a {
+    color: #222;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.sidebar a:hover {
+    color: #0077cc;
+}
+
 main {
     grid-area: main;
     padding: 20px;
+    background-color: #fff7d6; /* Soft yellow */
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 
 .ad {
     grid-area: ad;
     padding: 20px;
+    background-color: #ffe6f2; /* Light pink */
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 
 .ad img {
