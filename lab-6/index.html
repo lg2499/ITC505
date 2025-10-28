@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITC505 • Lab 6 • Do Something</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Google Fonts for sexy modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="layout">
+
+        <!-- ===== HEADER ===== -->
+        <header class="header card">
+            <div class="brand">
+                <div class="logo-circle">🧠</div>
+                <div class="titles">
+                    <h1>Lab 6: Do Something</h1>
+                    <p class="subtitle">Interactive JavaScript • Holy Grail Layout • ITC505</p>
+                </div>
+            </div>
+
+            <nav class="header-links">
+                <a href="#">Home</a>
+                <a href="#">Docs</a>
+                <a href="#">Support</a>
+            </nav>
+        </header>
+
+        <!-- ===== SIDEBAR / MENU ===== -->
+        <aside class="sidebar card">
+            <h2 class="section-title">Navigation</h2>
+            <ul class="nav-list">
+                <li><a href="#"><span class="icon">🏠</span> Dashboard</a></li>
+                <li><a href="#"><span class="icon">📊</span> Analytics</a></li>
+                <li><a href="#"><span class="icon">⚙️</span> Settings</a></li>
+                <li><a href="#"><span class="icon">📁</span> Projects</a></li>
+                <li><a href="#"><span class="icon">💬</span> Messages</a></li>
+                <li><a href="#"><span class="icon">🚪</span> Logout</a></li>
+            </ul>
+
+            <div class="sidebar-note">
+                <p><strong>Tip:</strong><br>Use the tool in the center panel to sort your numbers instantly. 🔥</p>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN CONTENT (YOUR JS INTERFACE GOES HERE) ===== -->
+        <main class="main card">
+            <h2 class="section-title">Number Sorter Tool</h2>
+            <p class="section-desc">
+                Enter some numbers (comma separated), then click “Sort Numbers”.
+                The script will clean the input, sort it, and show the result.
+            </p>
+
+            <div class="tool">
+                <label for="numbersInput" class="input-label">
+                    🔢 Enter numbers:
+                </label>
+                <input
+                    type="text"
+                    id="numbersInput"
+                    class="text-input"
+                    placeholder="Example: 12, 5, 9, 100, 3"
+                />
+
+                <div class="btn-row">
+                    <button id="sortBtn" class="btn primary-btn">⚡ Sort Numbers</button>
+                    <button id="shuffleBtn" class="btn ghost-btn">🔀 Random Demo</button>
+                </div>
+
+                <div class="results-area">
+                    <div class="result-block">
+                        <h3>Sorted (Ascending):</h3>
+                        <p id="sortedAsc" class="result-text">—</p>
+                    </div>
+                    <div class="result-block">
+                        <h3>Sorted (Descending):</h3>
+                        <p id="sortedDesc" class="result-text">—</p>
+                    </div>
+                    <div class="result-block">
+                        <h3>Minimum / Maximum:</h3>
+                        <p id="minMax" class="result-text">—</p>
+                    </div>
+                </div>
+
+                <p id="errorMsg" class="error-msg hidden">Invalid input. Please enter only numbers separated by commas.</p>
+            </div>
+
+            <div class="how-it-works">
+                <h2 class="section-title small">How does this work?</h2>
+                <ul class="steps">
+                    <li>1. Read the string from the input box.</li>
+                    <li>2. Split by commas → turn each piece into a number.</li>
+                    <li>3. Sort using JavaScript's <code>sort()</code> with a custom compare function.</li>
+                    <li>4. Display results live on the page (DOM update).</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- ===== RIGHT SIDE AD / "ADVERTISEMENT" ===== -->
+        <aside class="ad card">
+            <h2 class="section-title">Sponsored</h2>
+            <a class="ad-box" href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer">
+                <img
+                    src="https://m.media-amazon.com/images/I/61u1VALnXdL._AC_SL1500_.jpg"
+                    alt="Wireless Headphones"
+                    class="ad-img"
+                />
+                <div class="ad-info">
+                    <p class="ad-name">Wireless Noise-Canceling Headphones</p>
+                    <p class="ad-cta">View on Amazon →</p>
+                </div>
+            </a>
+
+            <p class="ad-disclaimer">This ad image is clickable and goes to Amazon (requirement ✔)</p>
+        </aside>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer card">
+            <div class="footer-inner">
+                <div class="addendum">
+                    <h2 class="section-title small">Addendum / Reflection</h2>
+                    <p class="addendum-text">
+                        <strong>Problem I solved:</strong> I built an interactive Number Sorter tool.
+                        The user types a list of numbers, and the page (using JavaScript)
+                        sorts them ascending and descending, and also shows min/max.
+                    </p>
+                    <p class="addendum-text">
+                        <strong>How I solved it:</strong> I take the input string, split it at commas,
+                        convert each piece to a Number, filter out bad values, then use
+                        <code>array.sort((a,b)=>a-b)</code> for ascending and <code>array.sort((a,b)=>b-a)</code> for descending.
+                        I update the page using <code>textContent</code>.
+                    </p>
+                    <p class="addendum-text">
+                        <strong>Difficulties:</strong> Input validation. If the user types "5, hi, 2"
+                        that breaks sorting. I fixed it by checking <code>isNaN()</code> and showing an
+                        error message with a red warning instead of crashing.
+                    </p>
+                </div>
+
+                <div class="last-updated">
+                    <p>Last updated:
+                        <span id="lastModified"></span>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div> <!-- end .layout -->
+
+
+    <!-- ===== YOUR SCRIPT FILE ===== -->
+    <script src="script.js"></script>
+
+    <!-- ===== REQUIRED LAST MODIFIED SCRIPT FROM RUBRIC ===== -->
+    <script type="text/javascript">
+        var x = document.lastModified;
+        document.getElementById('lastModified').textContent = x;
+    </script>
+</body>
+</html>
