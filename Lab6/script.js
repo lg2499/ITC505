@@ -1,16 +1,11 @@
-// script.js
-// Number Sorter Interactive Tool for Lab 6
-
 const inputEl = document.getElementById("numbersInput");
 const btnEl = document.getElementById("sortBtn");
 const outEl = document.getElementById("outputArea");
 const errEl = document.getElementById("errorMsg");
 
 btnEl.addEventListener("click", () => {
-  // clear old error
   errEl.textContent = "";
 
-  // read box
   const raw = inputEl.value.trim();
 
   if (raw.length === 0) {
@@ -19,7 +14,6 @@ btnEl.addEventListener("click", () => {
     return;
   }
 
-  // split into pieces
   const parts = raw.split(",");
   const nums = [];
 
@@ -31,7 +25,7 @@ btnEl.addEventListener("click", () => {
 
     if (Number.isNaN(value)) {
       errEl.textContent =
-        "⚠ Error: All values must be valid numbers (e.g. 5, 10, 3.5)";
+        "⚠ Error: Only numbers allowed (example: 5, 10, 3.5)";
       outEl.textContent = "—";
       return;
     }
@@ -45,10 +39,7 @@ btnEl.addEventListener("click", () => {
     return;
   }
 
-  // numeric sort (ascending)
   nums.sort((a, b) => a - b);
 
-  // show result
   outEl.textContent = "[ " + nums.join(", ") + " ]";
 });
-
