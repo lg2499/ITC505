@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pirates of the Caribbean Adventure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Pirates of the Caribbean: Choose Your Own Adventure</h1>
+  </header>
+
+  <main>
+    <div id="story"></div>
+    <div id="choices"></div>
+    <div id="image-container">
+      <img id="story-image" src="" alt="Story scene">
+    </div>
+  </main>
+
+  <footer>
+    <p>Last updated: <span id="lastModified"></span></p>
+
+    <section id="addendum">
+      <h3>Addendum</h3>
+      <p>
+        This project, “Pirates of the Caribbean: Choose Your Own Adventure,” was created using HTML, CSS, and JavaScript.
+        It includes 8 different endings and dynamic image updates based on user choices.
+        I planned the story flow first, then used JavaScript objects to manage scenes and consequences.
+        Debugging event listeners and DOM updates helped me better understand how to create interactive web experiences.
+        I also used CSS for a simple and immersive pirate theme.
+      </p>
+    </section>
+  </footer>
+
+  <script type="text/javascript">
+    var x = document.lastModified;
+    document.getElementById('lastModified').textContent = x;
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
