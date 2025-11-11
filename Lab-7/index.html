@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab 7: Mad Lib</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #2e3b4e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    form {
+      background: white;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    input[type="submit"] {
+      margin-top: 20px;
+      background-color: #2e3b4e;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    input[type="submit"]:hover {
+      background-color: #405977;
+    }
+    #story {
+      background: white;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      display: none;
+      text-align: justify;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #2e3b4e;
+      color: white;
+      font-size: 0.9em;
+    }
+    #addendum {
+      background-color: #405977;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.85em;
+      color: #e0e0e0;
+      line-height: 1.4;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mad Lib Generator</h1>
+    <p>Fill out the form below to create your funny story!</p>
+  </header>
+
+  <form id="madlibForm">
+    <label for="noun">Enter a Name (Noun):</label>
+    <input type="text" id="noun" name="noun" required />
+
+    <label for="verb">Enter a Verb:</label>
+    <input type="text" id="verb" name="verb" required />
+
+    <label for="adjective">Enter an Adjective:</label>
+    <input type="text" id="adjective" name="adjective" required />
+
+    <label for="place">Enter a Place:</label>
+    <input type="text" id="place" name="place" required />
+
+    <label for="animal">Enter an Animal:</label>
+    <input type="text" id="animal" name="animal" required />
+
+    <input type="submit" value="Create Story" />
+  </form>
+
+  <div id="story"></div>
+
+  <footer>
+    <p>
+      Created by <strong>Litheesh Gangapatnam</strong> — Lab 7 Mad Lib Project
+      <br />
+      Last updated: <span id="lastModified"></span>
+    </p>
+
+    <div id="addendum">
+      <h3>Addendum</h3>
+      <p>
+        This Mad Lib web page was built using modern HTML, CSS, and JavaScript.  
+        The form collects five user inputs (noun, verb, adjective, place, and animal).  
+        When the “Create Story” button is pressed, JavaScript dynamically generates a
+        personalized story without reloading the page.  
+        The design features a gradient background, rounded input boxes, and responsive layout.  
+        The footer automatically displays the page’s last modified date and includes this addendum.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Display last modified date
+    document.getElementById("lastModified").textContent = document.lastModified;
+
+    // Handle form submission
+    const form = document.getElementById("madlibForm");
+    const storyDiv = document.getElementById("story");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const noun = document.getElementById("noun").value.trim();
+      const verb = document.getElementById("verb").value.trim();
+      const adjective = document.getElementById("adjective").value.trim();
+      const place = document.getElementById("place").value.trim();
+      const animal = document.getElementById("animal").value.trim();
+
+      if (!noun || !verb || !adjective || !place || !animal) {
+        alert("Please fill out all fields!");
+        return;
+      }
+
+      const story = `
+        <h2>Your Mad Lib Story</h2>
+        <p>
+          Once upon a time in <strong>${place}</strong>, there was a
+          <strong>${adjective}</strong> <strong>${animal}</strong> named
+          <strong>${noun}</strong>. Every morning, ${noun} loved to
+          <strong>${verb}</strong> by the river while humming cheerful songs.
+          One day, ${noun} met a group of travelers who joined in, and together
+          they made <strong>${place}</strong> the happiest place ever!
+        </p>
+      `;
+      storyDiv.innerHTML = story;
+      storyDiv.style.display = "block";
+      form.reset();
+    });
+  </script>
+</body>
+</html>
