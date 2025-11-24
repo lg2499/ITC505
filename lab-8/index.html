@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lab 8 - Secure Form</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    label { display:block; margin-top: 10px; }
+    input { padding:8px; width:300px; }
+    .error { color: red; margin-top: 5px; }
+</style>
+</head>
+
+<body>
+<h2>Lab 8: Secure Registration Form</h2>
+
+<form id="regForm" onsubmit="return validateForm();">
+    <label>First Name:</label>
+    <input type="text" id="fname">
+
+    <label>Last Name:</label>
+    <input type="text" id="lname">
+
+    <label>Email:</label>
+    <input type="email" id="email">
+
+    <label>Password:</label>
+    <input type="password" id="password">
+
+    <label>Confirm Password:</label>
+    <input type="password" id="confirm">
+
+    <button type="submit" style="margin-top:15px;">Submit</button>
+</form>
+
+<p id="errorMsg" class="error"></p>
+
+<script>
+// XSS-Safe Encoding Function
+function sanitize(input) {
+    return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function validateForm() {
+    let fname = sanitize(document.getElementById("fname").value.trim());
+    let lname = sanitize(document.getElementById("lname").value.trim());
+    let email = sanitize(document.getElementById("email").value.trim());
+    let password = document.getElementById("password").value;
+    let confirm = document.getElementById("confirm").value;
+
+    let errorMsg = document.getElementById("errorMsg");
+    errorMsg.innerHTML = "";
+
+    if (!fname || !lname || !email || !password || !confirm) {
+        errorMsg.innerHTML = "All fields are required.";
+        return false;
+    }
+
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        errorMsg.innerHTML = "Invalid email format.";
+        return false;
+    }
+
+    if (password !== confirm) {
+        errorMsg.innerHTML = "Passwords do not match.";
+        return false;
+    }
+
+    alert("Form successfully submitted!");
+    return true;
+}
+</script>
+
+</body>
+</html>
