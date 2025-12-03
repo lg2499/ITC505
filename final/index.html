@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Revenge of Lights Out</title>
+
+    <!-- Fun fonts for "font-craziness" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #070b19;
+            --accent: #ffcc00;
+            --accent2: #00f0ff;
+            --tile-on: #ffe066;
+            --tile-off: #1a1a1a;
+            --tile-border: #444;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top, #1e1640 0, #05040d 60%, #000000 100%);
+            color: #f5f5f5;
+            font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .container {
+            width: min(900px, 98vw);
+            background: rgba(5, 5, 15, 0.9);
+            border-radius: 18px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+            padding: 1.8rem 2.2rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        header h1 {
+            font-family: "Press Start 2P", system-ui, monospace;
+            font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+            line-height: 1.5;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-shadow:
+                0 0 4px var(--accent),
+                0 0 12px var(--accent2),
+                0 0 22px rgba(0, 255, 255, 0.4);
+            margin: 0 0 0.4rem;
+        }
+
+        header p {
+            margin: 0.2rem 0;
+            font-size: 0.95rem;
+            color: #dcdcdc;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            color: var(--accent2);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+            gap: 1.8rem;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .game-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .board-wrapper {
+            padding: 0.9rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: radial-gradient(circle at top, #161627 0, #05040d 70%);
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            grid-template-rows: repeat(5, 60px);
+            gap: 6px;
+        }
+
+        @media (max-width: 480px) {
+            #board {
+                grid-template-columns: repeat(5, 48px);
+                grid-template-rows: repeat(5, 48px);
+                gap: 5px;
+            }
+        }
+
+        .tile {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            border: 2px solid var(--tile-border);
+            cursor: pointer;
+            background: var(--tile-on);
+            box-shadow:
+                0 0 8px rgba(255, 255, 255, 0.15),
+                inset 0 0 8px rgba(0, 0, 0, 0.3);
+            transition:
+                background 0.15s ease,
+                transform 0.1s ease,
+                box-shadow 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .tile:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Lights OFF state */
+        .tile.is-off {
+            background: var(--tile-off);
+            border-color: #777;
+            box-shadow:
+                0 0 4px rgba(0, 0, 0, 0.9),
+                inset 0 0 10px rgba(0, 0, 0, 0.9);
+        }
+
+        .controls {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 0.55rem 1.3rem;
+            background: linear-gradient(120deg, var(--accent), var(--accent2));
+            color: #05040d;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            transition:
+                transform 0.12s ease,
+                box-shadow 0.12s ease,
+                filter 0.12s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px) scale(1.02);
+            filter: brightness(1.1);
+            box-shadow: 0 0 22px rgba(0, 255, 255, 0.55);
+        }
+
+        .btn:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .stats {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.4rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #f0f0f0;
+        }
+
+        .badge span {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .sidebar {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .sidebar h2 {
+            font-family: "Press Start 2P", system-ui, monospace;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent2);
+            margin-top: 0;
+            margin-bottom: 0.6rem;
+        }
+
+        .sidebar p {
+            margin: 0 0 0.5rem;
+        }
+
+        .sidebar ol {
+            margin: 0.2rem 0 0.8rem 1.1rem;
+            padding: 0;
+        }
+
+        .font-notes {
+            margin-top: 0.8rem;
+            font-size: 0.78rem;
+            color: #bbbbbb;
+            border-top: 1px dashed rgba(255, 255, 255, 0.15);
+            padding-top: 0.6rem;
+        }
+
+        .font-notes strong {
+            color: var(--accent);
+        }
+
+        footer {
+            margin-top: 1.2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 0.6rem;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #cccccc;
+        }
+
+        footer span#lastModified {
+            color: var(--accent2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <p class="subtitle">ITC 505 • Final Project</p>
+            <h1>Revenge of Lights Out</h1>
+            <p>Click a tile to toggle it and its neighbors. Turn <strong>all lights off</strong> to win.</p>
+        </header>
+
+        <main>
+            <!-- GAME PANEL -->
+            <section class="game-panel" aria-label="Lights Out Game">
+                <div class="board-wrapper">
+                    <div id="board" aria-label="Game Board"></div>
+                </div>
+
+                <div class="controls">
+                    <button id="newGameBtn" class="btn">New Random Game</button>
+                    <div class="stats">
+                        <div class="badge">Moves: <span id="moveCount">0</span></div>
+                        <div class="badge">Board Size: <span>5 × 5</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SIDEBAR / INSTRUCTIONS -->
+            <aside class="sidebar">
+                <h2>How to Play</h2>
+                <ol>
+                    <li>Click any square on the board.</li>
+                    <li>That square and its <em>up/down/left/right</em> neighbors will flip.</li>
+                    <li>Yellow = light is <strong>on</strong>, dark = light is <strong>off</strong>.</li>
+                    <li>Your goal is to make <strong>every tile dark</strong>.</li>
+                </ol>
+                <p>
+                    This board is guaranteed to be solvable because the game starts from an
+                    all-off board and then applies a series of random simulated clicks using
+                    the same logic as the player. Any configuration created this way can
+                    always be undone.
+                </p>
+
+                <div class="font-notes">
+                    <p>
+                        <strong>Font Craziness:</strong> This page uses
+                        <code>Press Start 2P</code> for retro arcade-style headings and
+                        <code>Roboto</code> for the main body text. Both fonts are served from
+                        Google Fonts using a <code>&lt;link&gt;</code> tag in the
+                        <code>&lt;head&gt;</code>. The mixed pixel-art heading and smooth body
+                        text create the intentionally “crazy” contrast required for the
+                        assignment.
+                    </p>
+                </div>
+            </aside>
+        </main>
+
+        <!-- REQUIRED FOOTER (provided in assignment) -->
+        <footer>
+            <p>Last updated:
+                <span id="lastModified"></span>
+            </p>
+        </footer>
+    </div>
+
+    <!-- GAME LOGIC SCRIPT -->
+    <script type="text/javascript">
+        // ----- CONFIG -----
+        const BOARD_SIZE = 5; // 5x5 Lights Out board
+        const RANDOM_MOVES = 20; // number of random simulated clicks for a new game
+
+        const boardElement = document.getElementById("board");
+        const moveCountElement = document.getElementById("moveCount");
+        const newGameButton = document.getElementById("newGameBtn");
+
+        let tiles = []; // 2D array of tile elements
+        let moveCount = 0;
+
+        // Create the board elements and attach event listeners
+        function createBoard() {
+            tiles = [];
+            boardElement.innerHTML = "";
+
+            for (let row = 0; row < BOARD_SIZE; row++) {
+                const rowArray = [];
+                for (let col = 0; col < BOARD_SIZE; col++) {
+                    const tile = document.createElement("button");
+                    tile.classList.add("tile");
+                    tile.setAttribute("type", "button");
+                    tile.dataset.row = row;
+                    tile.dataset.col = col;
+
+                    tile.addEventListener("click", function () {
+                        handleTileClick(row, col);
+                    });
+
+                    boardElement.appendChild(tile);
+                    rowArray.push(tile);
+                }
+                tiles.push(rowArray);
+            }
+        }
+
+        // Toggle a single tile (on -> off, off -> on)
+        function toggleTile(row, col) {
+            if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) {
+                return; // outside the board
+            }
+            const tile = tiles[row][col];
+            tile.classList.toggle("is-off"); // is-off means light is off (dark)
+        }
+
+        // Perform one logical "move": toggle clicked tile + its orthogonal neighbors
+        function applyMove(row, col) {
+            toggleTile(row, col);
+            toggleTile(row - 1, col); // up
+            toggleTile(row + 1, col); // down
+            toggleTile(row, col - 1); // left
+            toggleTile(row, col + 1); // right
+        }
+
+        // Handle user's click, update move counter, check for win
+        function handleTileClick(row, col) {
+            applyMove(row, col);
+            moveCount++;
+            moveCountElement.textContent = moveCount;
+
+            if (checkWin()) {
+                window.alert("You win!");
+            }
+        }
+
+        // Check if all tiles are OFF (i.e., all have class is-off)
+        function checkWin() {
+            for (let row = 0; row < BOARD_SIZE; row++) {
+                for (let col = 0; col < BOARD_SIZE; col++) {
+                    const tile = tiles[row][col];
+                    if (!tile.classList.contains("is-off")) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        // Reset all tiles to OFF (solved board)
+        function resetBoardToSolved() {
+            for (let row = 0; row < BOARD_SIZE; row++) {
+                for (let col = 0; col < BOARD_SIZE; col++) {
+                    const tile = tiles[row][col];
+                    // Ensure every tile has the is-off class
+                    if (!tile.classList.contains("is-off")) {
+                        tile.classList.add("is-off");
+                    }
+                }
+            }
+        }
+
+        // Randomize board by applying RANDOM_MOVES random moves from solved state
+        // This guarantees the puzzle is solvable
+        function randomizeBoard() {
+            resetBoardToSolved();
+
+            for (let i = 0; i < RANDOM_MOVES; i++) {
+                const row = Math.floor(Math.random() * BOARD_SIZE);
+                const col = Math.floor(Math.random() * BOARD_SIZE);
+                applyMove(row, col);
+            }
+
+            moveCount = 0;
+            moveCountElement.textContent = moveCount;
+        }
+
+        // Initialize the board and set up the first puzzle
+        function initGame() {
+            createBoard();
+            randomizeBoard();
+        }
+
+        // New game button
+        newGameButton.addEventListener("click", function () {
+            randomizeBoard();
+        });
+
+        // Start the game on page load
+        initGame();
+    </script>
+
+    <!-- REQUIRED Last Modified script from assignment -->
+    <script type="text/javascript">
+        var x = document.lastModified;
+        document.getElementById('lastModified').textContent = x;
+    </script>
+</body>
+</html>
